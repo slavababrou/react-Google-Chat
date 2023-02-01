@@ -38,6 +38,7 @@ const Logo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Enter = styled.div`
@@ -151,6 +152,7 @@ const ContentFooterText = styled.div`
   font-weight: 500;
   text-transform: none;
   color: #1a73e8;
+  cursor: pointer;
 `;
 const BtnNext = styled.button`
   font-family: "Google Sans", Roboto, Arial, sans-serif;
@@ -165,6 +167,7 @@ const BtnNext = styled.button`
   border-radius: 5px;
   color: white;
   padding: 4px 0;
+  cursor: pointer;
 `;
 const Footer = styled.div`
   display: flex;

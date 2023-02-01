@@ -117,7 +117,7 @@ const Search = () => {
   return (
     <Container>
       <FormWrapper>
-        <Form>
+        <Form onSubmit={(e) => e.preventDefault()}>
           <Button>
             <svg
               focusable='false'
