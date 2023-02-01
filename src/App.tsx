@@ -6,6 +6,7 @@ import TabList from "./components/tabList/TabList";
 import LogIn from "./components/login/LogIn";
 
 import styled from "styled-components";
+import GlobalStyles from "./styles/global";
 
 const Flex = styled.div<{ flow?: string }>`
   display: flex;
@@ -33,13 +34,16 @@ function App() {
 
   if (!isLogIn)
     return (
-      <LogIn
-        onIsLogInHandler={isLogInHandler}
-        onLoginInputHandler={loginInputHandler}
-        login={login}
-        onPasswordInputHandler={passwordInputHandler}
-        password={password}
-      />
+      <>
+        <LogIn
+          onIsLogInHandler={isLogInHandler}
+          onLoginInputHandler={loginInputHandler}
+          login={login}
+          onPasswordInputHandler={passwordInputHandler}
+          password={password}
+        />
+        <GlobalStyles />
+      </>
     );
 
   return (
@@ -54,6 +58,7 @@ function App() {
         <Main />
         <TabList />
       </Flex>
+      <GlobalStyles />
     </Flex>
   );
 }
