@@ -3,6 +3,7 @@ import Main from "../main/Main";
 import Navigation from "../navigation/Navigation";
 import TabList from "../tabList/TabList";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const Flex = styled.div<{ flow?: string }>`
   display: flex;
@@ -10,13 +11,17 @@ const Flex = styled.div<{ flow?: string }>`
 `;
 
 const Application = (props: any) => {
+ 
+
   return (
-    <Flex flow='column'>
+    <Flex flow="column">
       <Header
         onToogleMenu={props.toogleMenu}
         login={props.login}
         logout={() => {
           props.isLogInHandler(false);
+          localStorage.removeItem("auth");
+         
         }}
       />
       <Flex>

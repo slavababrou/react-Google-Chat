@@ -130,7 +130,7 @@ const InptInputWrapper = styled.input`
   margin: 0 20px 0 0;
   height: 16px;
   width: 16px;
-  cursor: pointer;
+  cursor: pointer;  
 `;
 const LblInputWrapper = styled.label`
   display: flex;
@@ -481,3 +481,4 @@ const LogIn = (props: any) => {
 };
 
 export default LogIn;
+  
