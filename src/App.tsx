@@ -32,10 +32,10 @@ function App() {
             element={
               <>
                 <LogIn
-                  onIsLogInHandler={isLogInHandler}
-                  onLoginInputHandler={loginInputHandler}
+                  isLogInHandler={isLogInHandler}
+                  loginInputHandler={loginInputHandler}
                   login={login}
-                  onPasswordInputHandler={passwordInputHandler}
+                  passwordInputHandler={passwordInputHandler}
                   password={password}
                 />
               </>

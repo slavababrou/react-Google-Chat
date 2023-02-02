@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -57,28 +58,6 @@ const EnterText = styled.span`
   font-weight: 400;
   line-height: 1.3333;
 `;
-const BtnLogout = styled.button`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  border-radius: 16px;
-  background: #fff;
-  border: 1px solid #dadce0;
-  color: #3c4043;
-  cursor: pointer;
-  display: inline-flex;
-  font-family: "Google Sans", "Noto Sans Myanmar UI", arial, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.25px;
-  max-width: 100%;
-  text-align: center;
-  margin: 10px 0 0 0;
-  padding: 0 5px 0 7px;
-`;
-const Login = styled.div`
-  padding: 5px;
-`;
 const ContainerWrapper = styled.div`
   padding: 24px 0 0;
 `;
@@ -113,27 +92,6 @@ const InptContainerWrapperContent = styled.input`
     top: -2px;
     left: 5px;
   }
-`;
-const InputWrapper = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  gap: 15px;
-  color: #202124;
-  font-size: 14px;
-  line-height: 1.4286;
-  height: 44px;
-`;
-const InptInputWrapper = styled.input`
-  margin: 0 20px 0 0;
-  height: 16px;
-  width: 16px;
-  cursor: pointer;
-`;
-const LblInputWrapper = styled.label`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
 `;
 const ContentFooter = styled.div`
   display: flex;
@@ -233,12 +191,6 @@ const Details = styled.a`
   font-size: inherit;
   padding: 0;
 `;
-const ImgEnter = styled.img`
-  border-radius: 50%;
-`;
-const greetingText: string = "Добро пожаловать!";
-const showPasswordText: string = "Показать пароль";
-const changeWayText: string = "Выбрать другой способ";
 const nextText: string = "Далее";
 const languageText: string = "Русский";
 const referenceText: string = "Справка";
@@ -254,6 +206,16 @@ const moreDetailsText: string = "Подробнее";
 const createAccountText: string = "Создать аккаунт";
 
 const SetLogin = (props: any) => {
+  const loginRef = useRef<HTMLInputElement>(null);
+
+  const setLogin = () => {
+    if (!loginRef.current?.value.trim()) return;
+    props.loginInputHandler(loginRef.current?.value.trim());
+    loginRef.current.value = "";
+  };
+
+  const setLoginEntered = () => props.isLoginEnteredHandler(true);
+
   return (
     <Container>
       <LoginWrapper>
@@ -311,7 +273,7 @@ const SetLogin = (props: any) => {
               <ContainerWrapperContent>
                 <InptContainerWrapperContent
                   placeholder='Телефон или адрес эл. почты'
-                  ref={props.loginRef}
+                  ref={loginRef}
                 ></InptContainerWrapperContent>
                 <BtnForgotMail>{forgotMailText}</BtnForgotMail>
               </ContainerWrapperContent>
@@ -323,7 +285,14 @@ const SetLogin = (props: any) => {
 
             <ContentFooter>
               <ContentFooterText>{createAccountText}</ContentFooterText>
-              <BtnNext to='/auth' onClick={props.setLogin}>
+              <BtnNext
+                to='/auth'
+                onClick={(e) => {
+                  e.preventDefault();
+                  setLogin();
+                  setLoginEntered();
+                }}
+              >
                 {nextText}
               </BtnNext>
             </ContentFooter>

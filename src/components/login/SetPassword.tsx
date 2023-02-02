@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -199,40 +200,6 @@ const LiFooter = styled.div`
   cursor: pointer;
   font-weight: 500;
 `;
-const BtnForgotMail = styled.button`
-  border-radius: 4px;
-  color: #1a73e8;
-  display: inline-block;
-  font-weight: 500;
-  letter-spacing: 0.25px;
-  outline: 0;
-  position: relative;
-  background-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  padding: 0;
-  text-align: left;
-  border: 0;
-  padding: 9px 0 3px;
-  font-weight: 500;
-`;
-const ContainerWrapperText = styled.span`
-  color: #5f6368;
-  font-size: 14px;
-  line-height: 1.4286;
-`;
-const Details = styled.a`
-  text-decoration: none;
-  color: #1a73e8;
-  font-weight: 500;
-  letter-spacing: 0.25px;
-  outline: 0;
-  position: relative;
-  background-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  padding: 0;
-`;
 const ImgEnter = styled.img`
   border-radius: 50%;
 `;
@@ -245,15 +212,19 @@ const referenceText: string = "Справка";
 const privacyText: string = "Конфидециальность";
 const conditionsText: string = "Условия";
 
-const enterArticleText: string = "Вход";
-const enterText: string = "Используйте аккаунт Google";
-const forgotMailText: string = "Забыли адрес электронной почты?";
-const alienComputerText: string =
-  "Работаете на чужом компьютере? Включите гостевой режим.";
-const moreDetailsText: string = "Подробнее";
-const createAccountText: string = "Создать аккаунт";
-
 const SetPassword = (props: any) => {
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const setPassword = () => {
+    if (!passwordRef.current?.value.trim()) return;
+    props.passwordInputHandler(passwordRef.current?.value.trim());
+    passwordRef.current.value = "";
+  };
+
+  const setLogIn = () => props.isLogInHandler(true);
+
+  const resetLogin = () => props.isLoginEnteredHandler(false);
+
   return (
     <Container>
       <LoginWrapper>
@@ -303,7 +274,7 @@ const SetPassword = (props: any) => {
           </Logo>
           <Enter>
             <EnterText>{greetingText}</EnterText>
-            <BtnLogout onClick={props.resetLogin}>
+            <BtnLogout onClick={resetLogin}>
               <ImgEnter
                 src='https://lh3.googleusercontent.com/a/AEdFTp6rcIvtO1leC0lhwRoJFmLrAfa5-juDQZxwjdmILA=s128-c'
                 alt=''
@@ -330,7 +301,7 @@ const SetPassword = (props: any) => {
               <ContainerWrapperContent>
                 <InptContainerWrapperContent
                   placeholder='Введите пароль'
-                  ref={props.passwordRef}
+                  ref={passwordRef}
                 ></InptContainerWrapperContent>
                 <InputWrapper>
                   <LblInputWrapper>
@@ -343,7 +314,14 @@ const SetPassword = (props: any) => {
 
             <ContentFooter>
               <ContentFooterText>{changeWayText}</ContentFooterText>
-              <BtnNext to='/app' onClick={props.setPassword}>
+              <BtnNext
+                to='/app'
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPassword();
+                  setLogIn();
+                }}
+              >
                 {nextText}
               </BtnNext>
             </ContentFooter>
