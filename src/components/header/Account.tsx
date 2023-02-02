@@ -57,9 +57,7 @@ const Account = (props: any) => {
           src='https://lh3.googleusercontent.com/ogw/AOh-ky3VCpUP6swHXwA-fT6qtPbYaAp74UndpxKmWlm3DA=s32-c-mo'
         />
       </Img>
-      {isUserOpen && (
-        <User login={props.login} logoutHandler={props.logoutHandler} />
-      )}
+      {isUserOpen && <User login={props.login} logout={props.logout} />}
     </Container>
   );
 };

@@ -1,17 +1,8 @@
 import { useState } from "react";
-import Header from "./components/header/Header";
-import Main from "./components/main/Main";
-import Navigation from "./components/navigation/Navigation";
-import TabList from "./components/tabList/TabList";
+import { Routes, Route, Navigate } from "react-router-dom";
 import LogIn from "./components/login/LogIn";
-
-import styled from "styled-components";
+import Application from "./components/Application/Application";
 import GlobalStyles from "./styles/global";
-
-const Flex = styled.div<{ flow?: string }>`
-  display: flex;
-  flex-flow: ${(props) => props.flow || "row"} nowrap;
-`;
 
 function App() {
   const [isMenuActive, setIsMenuActive] = useState(true);
@@ -19,47 +10,58 @@ function App() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  function toogleMenu() {
+  const toogleMenu = () => {
     setIsMenuActive(!isMenuActive);
-  }
-  function isLogInHandler(handler: boolean) {
+  };
+  const isLogInHandler = (handler: boolean) => {
     setIsLogIn(handler);
-  }
-  function loginInputHandler(handler: string) {
+  };
+  const loginInputHandler = (handler: string) => {
     setLogin(handler);
-  }
-  function passwordInputHandler(handler: string) {
+  };
+  const passwordInputHandler = (handler: string) => {
     setPassword(handler);
-  }
-
-  if (!isLogIn)
-    return (
-      <>
-        <LogIn
-          onIsLogInHandler={isLogInHandler}
-          onLoginInputHandler={loginInputHandler}
-          login={login}
-          onPasswordInputHandler={passwordInputHandler}
-          password={password}
-        />
-        <GlobalStyles />
-      </>
-    );
+  };
 
   return (
-    <Flex flow='column'>
-      <Header
-        onToogleMenu={toogleMenu}
-        login={login}
-        logoutHandler={isLogInHandler}
-      />
-      <Flex>
-        <Navigation isMenuActive={isMenuActive} />
-        <Main />
-        <TabList />
-      </Flex>
+    <>
+      <Routes>
+        {!isLogIn ? (
+          <Route
+            path='/auth'
+            element={
+              <>
+                <LogIn
+                  onIsLogInHandler={isLogInHandler}
+                  onLoginInputHandler={loginInputHandler}
+                  login={login}
+                  onPasswordInputHandler={passwordInputHandler}
+                  password={password}
+                />
+              </>
+            }
+          />
+        ) : (
+          <Route
+            path='/app'
+            element={
+              <Application
+                toogleMenu={toogleMenu}
+                login={login}
+                isLogInHandler={isLogInHandler}
+                isMenuActive={isMenuActive}
+              />
+            }
+          />
+        )}
+
+        <Route
+          path='*'
+          element={<Navigate to={isLogIn ? "/app" : "/auth"} />}
+        />
+      </Routes>
       <GlobalStyles />
-    </Flex>
+    </>
   );
 }
 

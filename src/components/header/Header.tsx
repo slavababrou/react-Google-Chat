@@ -20,7 +20,7 @@ const Header = (props: any) => {
     <Container>
       <Menu onToogleMenu={props.onToogleMenu} />
       <Search />
-      <Account login={props.login} logoutHandler={props.logoutHandler} />
+      <Account login={props.login} logout={props.logout} />
     </Container>
   );
 };

@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -154,20 +155,19 @@ const ContentFooterText = styled.div`
   color: #1a73e8;
   cursor: pointer;
 `;
-const BtnNext = styled.button`
+const BtnNext = styled(Link)`
   font-family: "Google Sans", Roboto, Arial, sans-serif;
   font-size: 0.875rem;
   letter-spacing: 0.0107142857em;
   font-weight: 500;
   text-transform: none;
-  height: 36px;
-  width: 92px;
   border: 0;
   background: #1a73e8;
   border-radius: 5px;
   color: white;
-  padding: 4px 0;
+  padding: 8px 24px;
   cursor: pointer;
+  text-decoration: none;
 `;
 const Footer = styled.div`
   display: flex;
@@ -274,7 +274,7 @@ const LogIn = (props: any) => {
     passwordRef.current.value = "";
     props.onIsLogInHandler(true);
   };
-  const isLoginEnteredHandler = () => {
+  const resetLogin = () => {
     setIsLoginEntered(false);
   };
 
@@ -332,7 +332,7 @@ const LogIn = (props: any) => {
               </Logo>
               <Enter>
                 <EnterText>{greetingText}</EnterText>
-                <BtnLogout onClick={isLoginEnteredHandler}>
+                <BtnLogout onClick={resetLogin}>
                   <ImgEnter
                     src='https://lh3.googleusercontent.com/a/AEdFTp6rcIvtO1leC0lhwRoJFmLrAfa5-juDQZxwjdmILA=s128-c'
                     alt=''
@@ -372,7 +372,9 @@ const LogIn = (props: any) => {
 
                 <ContentFooter>
                   <ContentFooterText>{changeWayText}</ContentFooterText>
-                  <BtnNext onClick={setPassword}>{nextText}</BtnNext>
+                  <BtnNext to='/app' onClick={setPassword}>
+                    {nextText}
+                  </BtnNext>
                 </ContentFooter>
               </ContainerWrapper>
             </Content>
@@ -460,7 +462,9 @@ const LogIn = (props: any) => {
 
                 <ContentFooter>
                   <ContentFooterText>{createAccountText}</ContentFooterText>
-                  <BtnNext onClick={setLogin}>{nextText}</BtnNext>
+                  <BtnNext to='/auth' onClick={setLogin}>
+                    {nextText}
+                  </BtnNext>
                 </ContentFooter>
               </ContainerWrapper>
             </Content>

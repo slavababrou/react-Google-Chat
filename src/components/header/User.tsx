@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -95,7 +96,7 @@ const ExitWrapper = styled.div`
   justify-content: center;
   margin: 16px 0;
 `;
-const BtnExit = styled.div`
+const BtnExit = styled(Link)`
   background: white;
   border: 1px solid rgb(192, 192, 192);
   padding: 13px 30px;
@@ -104,6 +105,7 @@ const BtnExit = styled.div`
   font-weight: bold;
   color: rgb(67, 67, 67);
   cursor: pointer;
+  text-decoration: none;
   &:hover {
     background: rgb(250, 250, 250);
   }
@@ -136,8 +138,6 @@ const useRuleText: string = "Условия Использования";
 const addAccountText: string = "Добавить аккаунт";
 
 const User = (props: any) => {
-  const onLogout = () => props.logoutHandler(false);
-
   return (
     <Container>
       <Account>
@@ -155,7 +155,9 @@ const User = (props: any) => {
       </WrapperAddAccount>
       <hr />
       <ExitWrapper>
-        <BtnExit onClick={onLogout}>{logoutText}</BtnExit>
+        <BtnExit to='/auth' onClick={props.logout}>
+          {logoutText}
+        </BtnExit>
       </ExitWrapper>
       <hr />
       <Footer>
