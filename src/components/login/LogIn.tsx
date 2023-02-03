@@ -1,6 +1,8 @@
-
 import { useState, useRef } from "react";
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+import SetPassword from "./SetPassword";
+import SetLogin from "./SetLogin";
 
 import styled from "styled-components";
 
@@ -131,7 +133,7 @@ const InptInputWrapper = styled.input`
   margin: 0 20px 0 0;
   height: 16px;
   width: 16px;
-  cursor: pointer;  
+  cursor: pointer;
 `;
 const LblInputWrapper = styled.label`
   display: flex;
@@ -259,7 +261,6 @@ const alienComputerText: string =
 const moreDetailsText: string = "Подробнее";
 const createAccountText: string = "Создать аккаунт";
 
-
 const LogIn = (props: any) => {
   const [isLoginEntered, setIsLoginEntered] = useState(false);
 
@@ -296,4 +297,3 @@ const LogIn = (props: any) => {
 };
 
 export default LogIn;
-  

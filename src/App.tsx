@@ -11,6 +11,7 @@ function App() {
   const [isLogIn, setIsLogIn] = useState(false);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
   useEffect(() => {
     if (localStorage.getItem("auth")) {
       setIsLogIn(true);
@@ -20,13 +21,18 @@ function App() {
   const toogleMenu = () => {
     setIsMenuActive(!isMenuActive);
   };
+
   const isLogInHandler = (handler: boolean) => {
     setIsLogIn(handler);
-    localStorage.setItem("auth",'true');
+    handler
+      ? localStorage.setItem("auth", "true")
+      : localStorage.removeItem("auth");
   };
+
   const loginInputHandler = (handler: string) => {
     setLogin(handler);
   };
+
   const passwordInputHandler = (handler: string) => {
     setPassword(handler);
   };
@@ -36,7 +42,7 @@ function App() {
       <Routes>
         {!isLogIn ? (
           <Route
-            path="/auth"
+            path='/auth'
             element={
               <>
                 <LogIn
@@ -51,7 +57,7 @@ function App() {
           />
         ) : (
           <Route
-            path="/app"
+            path='/app'
             element={
               <Application
                 isLogin={isLogIn}
@@ -64,7 +70,7 @@ function App() {
           />
         )}
         <Route
-          path="*"
+          path='*'
           element={<Navigate to={isLogIn ? "/app" : "/auth"} />}
         />
       </Routes>

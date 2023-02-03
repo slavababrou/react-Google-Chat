@@ -11,17 +11,13 @@ const Flex = styled.div<{ flow?: string }>`
 `;
 
 const Application = (props: any) => {
- 
-
   return (
-    <Flex flow="column">
+    <Flex flow='column'>
       <Header
         onToogleMenu={props.toogleMenu}
         login={props.login}
         logout={() => {
           props.isLogInHandler(false);
-          localStorage.removeItem("auth");
-         
         }}
       />
       <Flex>
