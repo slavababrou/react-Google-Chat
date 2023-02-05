@@ -3,7 +3,6 @@ import Main from "../main/Main";
 import Navigation from "../navigation/Navigation";
 import TabList from "../tabList/TabList";
 import styled from "styled-components";
-import { useEffect } from "react";
 
 const Flex = styled.div<{ flow?: string }>`
   display: flex;

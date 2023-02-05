@@ -1,5 +1,5 @@
-import Chat from "./Chat";
-import ChatGroup from "./ChatGroup";
+import Chat from "../chats/Chat";
+import ChatGroup from "../chats/ChatGroup";
 import Meets from "./Meets";
 
 import styled from "styled-components";

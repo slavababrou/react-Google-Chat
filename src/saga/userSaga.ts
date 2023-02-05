@@ -27,8 +27,9 @@ function* fetchUsersWorker() {
     //   () => new Promise((res) => res(data.json()))
     // );
 
+
     const json: [] = yield call(() => new Promise((res) => res(data)));
-    yield put({ type: UserActionTypes.SET_USERS, payload: json });
+    yield put({ type: UserActionTypes.SET_USERS_SUCCESS, payload: json });
   } catch (e) {
     console.log(e);
 
