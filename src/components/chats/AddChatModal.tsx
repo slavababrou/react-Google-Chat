@@ -33,7 +33,6 @@ const AddChatModal: FC<any> = (props: any) => {
   useEffect(() => {
     dispatch(asyncSetUserAction());
   }, []);
-  //   const [searchedUsers, setSearchedUsers] = useState<any[]>(users);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const dispatch = useDispatch();
   const searchedUsers = useMemo(() => {
