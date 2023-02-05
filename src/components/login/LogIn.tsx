@@ -236,8 +236,7 @@ const Details = styled.a`
   position: relative;
   background-color: transparent;
   cursor: pointer;
-  font-size: inherit;Не избегать проблем ...
-
+  font-size: inherit;
   padding: 0;
 `;
 const ImgEnter = styled.img`
